@@ -18,13 +18,34 @@ app.use(express.static('public'))
 // Stel Liquid in als 'view engine'
 const engine = new Liquid();
 app.engine('liquid', engine.express());
+app.set('view engine', 'liquid');
 
 // Stel de map met Liquid templates in
 // Let op: de browser kan deze bestanden niet rechtstreeks laden (zoals voorheen met HTML bestanden)
 app.set('views', './views')
 
 
-console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
+app.get('/', (req, res) => {
+  res.render('index'); 
+});
+
+app.get('/detail', async function (request, response) {
+  const productsResponse = await fetch('https://fdnd-agency.directus.app/items/milledoni_products');
+  const productsJSON = await productsResponse.json();
+
+  response.render('detail.liquid', { products: productsJSON.data });
+});
+
+
+app.get('/favoriet', (req, res) => {
+  res.render('favoriet'); 
+});
+
+
+app.get('/favorieten', (req, res) => {
+  res.render('favorieten'); 
+});
+
 
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
@@ -65,7 +86,7 @@ app.post(…, async function (request, response) {
 
 // Stel het poortnummer in waar Express op moet gaan luisteren
 // Lokaal is dit poort 8000; als deze applicatie ergens gehost wordt, waarschijnlijk poort 80
-app.set('port', process.env.PORT || 8000)
+app.set('port', process.env.PORT || 8011)
 
 // Start Express op, gebruik daarbij het zojuist ingestelde poortnummer op
 app.listen(app.get('port'), function () {
