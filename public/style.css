@@ -231,6 +231,147 @@ button.sub svg {
   height: 30px;
 }
 
+/* detail */
+
+.main-content {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 1rem;
+}
+
+.title-section {
+  text-align: center;
+}
+
+.content-info {
+  text-align: center;
+}
+
+.extra-text {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* Media querie */
+
+
+@media (min-width: 768px) {
+  .main-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .carousel, .content-info {
+    flex: 1;
+  }
+
+  .content-info {
+    padding-left: 2rem;
+    text-align: left;
+  }
+
+  .title-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .carousel {
+    height: 300px; 
+  }
+
+  .main-content {
+    align-items: center;
+  }
+}
+
+
+/* end mediaquerie */
+
+.borders {
+width: 30px; 
+height: 30px;
+background-color: #3498db; 
+border: 1px solid white;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+border-radius: 50%; 
+z-index: 2;
+position: absolute;  
+}
+
+
+
+.carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.carousel-images {
+  display: flex;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.carousel-images img {
+  width: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  font-size: 24px;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.prev { 
+  left: 20px;
+}
+
+.next { 
+  right: 20px;
+}
+
+.dots {
+  position: absolute;
+  text-align: center;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 5px;
+  background-color: gray;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: black;
+}
 
 /* Main layout styling */
 .main-layout {

@@ -36,6 +36,24 @@ app.get('/detail', async function (request, response) {
   response.render('detail.liquid', { products: productsJSON.data });
 });
 
+app.get('/detail/:id', async function (request, response) {
+  try {
+      const productDetailResponse = await fetch('https://fdnd-agency.directus.app/items/milledoni_products/' + request.params.id);
+      const productDetailResponseJSON = await productDetailResponse.json();
+
+      console.log("Opgehaalde data:", productDetailResponseJSON); 
+
+      if (!productDetailResponseJSON.data) {
+          return response.status(404).send("Product niet gevonden.");
+      }
+
+      response.render('detail.liquid', { product: productDetailResponseJSON.data });
+  } catch (error) {
+      console.error("Fout bij ophalen product:", error);
+      response.status(500).send("Er is iets misgegaan.");
+  }
+
+});
 
 app.get('/favoriet', (req, res) => {
   res.render('favoriet'); 
